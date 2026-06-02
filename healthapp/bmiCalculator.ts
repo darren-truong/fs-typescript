@@ -1,3 +1,8 @@
+if (process.argv[1] === import.meta.filename) {
+  const { value1, value2 } = parseArgumentsForBmiCalculator(process.argv);
+  console.log(calculateBmi(value1, value2));
+}
+
 function parseArgumentsForBmiCalculator(args: string[]) {
   if (args.length < 4) throw new Error("Not enough arguments");
   if (args.length > 4) throw new Error("Too many arguments");
@@ -9,7 +14,7 @@ function parseArgumentsForBmiCalculator(args: string[]) {
   throw new Error("Provided values were not numbers!");
 }
 
-function calculateBmi(height: number, weight: number): string {
+export function calculateBmi(height: number, weight: number): string {
   const bmi = weight / ((height / 100) * (height / 100));
   let message = "";
 
@@ -33,6 +38,3 @@ function calculateBmi(height: number, weight: number): string {
 
   return message;
 }
-
-const { value1, value2 } = parseArgumentsForBmiCalculator(process.argv);
-console.log(calculateBmi(value1, value2));
