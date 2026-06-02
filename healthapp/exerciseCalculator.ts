@@ -1,3 +1,15 @@
+function parseArgumentsForExerciseCalculator(args: string[]) {
+  for (const arg of args.slice(2)) {
+    if (!Number.isFinite(Number(arg))) {
+      throw new Error("One of the arguments passed is not a number");
+    }
+  }
+  return {
+    dailyExerciseHours: args.slice(3).map((day) => Number(day)),
+    target: Number(args[2]),
+  };
+}
+
 interface Result {
   periodLength: number;
   trainingDays: number;
@@ -45,4 +57,7 @@ function calculateExercises(
   };
 }
 
-console.log(calculateExercises([3, 0, 2, 4.5, 0, 3, 1], 2));
+const { dailyExerciseHours, target } = parseArgumentsForExerciseCalculator(
+  process.argv,
+);
+console.log(calculateExercises(dailyExerciseHours, target));
