@@ -16,7 +16,7 @@ function parseArgumentsForBmiCalculator(args: string[]) {
 
 export function calculateBmi(height: number, weight: number): string {
   const bmi = weight / ((height / 100) * (height / 100));
-  let message = "";
+  let message;
 
   if (bmi >= 40.0) {
     message = "Obese (Class III)";
