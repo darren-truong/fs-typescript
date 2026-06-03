@@ -19,7 +19,7 @@ app.get("/bmi", (req, res) => {
 
   const bmi = calculateBmi(Number(height), Number(weight));
 
-  return res.json({ weight, height, bmi });
+  return res.json({ weight: Number(weight), height: Number(height), bmi });
 });
 
 app.post("/exercises", (req, res) => {
