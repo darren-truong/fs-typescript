@@ -1,14 +1,15 @@
+import type { CoursePart } from "../App";
+import Part from "./Part";
+
 type ContentProps = {
-  courseParts: { name: string; exerciseCount: number }[];
+  courseParts: CoursePart[];
 };
 
 const Content = ({ courseParts }: ContentProps) => {
   return (
     <>
       {courseParts.map((coursePart) => (
-        <p key={coursePart.name}>
-          {coursePart.name} {coursePart.exerciseCount}
-        </p>
+        <Part key={coursePart.name} coursePart={coursePart} />
       ))}
     </>
   );
