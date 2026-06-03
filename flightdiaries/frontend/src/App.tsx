@@ -4,6 +4,9 @@ import diaryService from "./diaryService.ts";
 
 function App() {
   const [diaries, setDiaries] = useState<DiaryEntry[]>([]);
+  const [date, setDate] = useState("");
+  const [weather, setWeather] = useState("");
+  const [visibility, setVisibility] = useState("");
 
   useEffect(() => {
     diaryService.getAll().then((data) => setDiaries(data));
@@ -13,10 +16,42 @@ function App() {
     return null;
   }
 
-  console.log(diaries);
+  const handleDiaryCreation = async (event: React.SyntheticEvent) => {
+    event.preventDefault();
+    const diaryToAdd = {
+      date,
+      weather,
+      visibility,
+    };
+    const newDiary = await diaryService.create(
+      diaryToAdd as Omit<DiaryEntry, "id">,
+    );
+    setDiaries(diaries.concat(newDiary));
+    setWeather("");
+    setVisibility("");
+    setDate("");
+  };
 
   return (
     <div>
+      <form onSubmit={handleDiaryCreation}>
+        <input
+          value={date}
+          placeholder="date"
+          onChange={(event) => setDate(event.target.value)}
+        />
+        <input
+          value={weather}
+          placeholder="weather"
+          onChange={(event) => setWeather(event.target.value)}
+        />
+        <input
+          value={visibility}
+          placeholder="visibility"
+          onChange={(event) => setVisibility(event.target.value)}
+        />
+        <button type="submit">submit</button>
+      </form>
       {diaries.map((diary) => (
         <>
           <div>Diary ID: {diary.id}</div>

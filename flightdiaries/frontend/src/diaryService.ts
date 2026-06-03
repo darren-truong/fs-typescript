@@ -9,4 +9,10 @@ const getAll = () => {
     .then((response) => response.data as DiaryEntry[]);
 };
 
-export default { getAll };
+const create = (diary: Omit<DiaryEntry, "id">) => {
+  return axios
+    .post<DiaryEntry>(baseUrl, diary)
+    .then((response) => response.data);
+};
+
+export default { getAll, create };
