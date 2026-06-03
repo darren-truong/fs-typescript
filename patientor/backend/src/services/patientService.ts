@@ -1,4 +1,5 @@
 import type {
+  Gender,
   NewPatientEntry,
   NonSensitivePatientEntry,
   PatientEntry,
@@ -11,7 +12,7 @@ const getNonSensitiveEntries = (): NonSensitivePatientEntry[] => {
     id: patient.id,
     name: patient.name,
     dateOfBirth: patient.dateOfBirth,
-    gender: patient.gender,
+    gender: patient.gender as Gender,
     occupation: patient.occupation,
   }));
 };
