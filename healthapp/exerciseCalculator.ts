@@ -1,3 +1,10 @@
+if (process.argv[1] === import.meta.filename) {
+  const { dailyExerciseHours, target } = parseArgumentsForExerciseCalculator(
+    process.argv,
+  );
+  console.log(calculateExercises(dailyExerciseHours, target));
+}
+
 function parseArgumentsForExerciseCalculator(args: string[]) {
   for (const arg of args.slice(2)) {
     if (!Number.isFinite(Number(arg))) {
@@ -20,7 +27,7 @@ interface Result {
   average: number;
 }
 
-function calculateExercises(
+export function calculateExercises(
   dailyExerciseHours: number[],
   target: number,
 ): Result {
@@ -56,8 +63,3 @@ function calculateExercises(
     average,
   };
 }
-
-const { dailyExerciseHours, target } = parseArgumentsForExerciseCalculator(
-  process.argv,
-);
-console.log(calculateExercises(dailyExerciseHours, target));
